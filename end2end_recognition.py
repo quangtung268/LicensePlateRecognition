@@ -7,10 +7,11 @@ from utils import plot_img, box_center2corner, intersection_over_union, iou_per_
 from detection.handcrafted import Preprocess, DetectChars, DetectPlates, Detect
 
 import warnings
+
 warnings.filterwarnings('ignore')
 
-
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
 
 def end2end_character_based(img):  # RGB image
     from recognition.character_based import model_chacter_based, ctc_decoder
@@ -48,21 +49,17 @@ def end2end_character_based(img):  # RGB image
         x1, y1, x2, y2 = box_center2corner(boxes[i])
         x, y, w, h = int(x1), int(y1), int(w), int(h)
 
-
         font = cv2.FONT_HERSHEY_SIMPLEX
         fontScale = 1
         color = (255, 255, 255)
         thickness = 3
         cv2.rectangle(img, (int(x), int(y)), (int(x + w), int(y + h)), color, thickness)
-        cv2.putText(img, preds_str[0], (x-20, y+ h + 30), font, fontScale, color, thickness, cv2.LINE_AA)
+        cv2.putText(img, preds_str[0], (x - 20, y + h + 30), font, fontScale, color, thickness, cv2.LINE_AA)
 
     plot_img(img)
 
 
-
-
-
-def end2end_segment_based(img): # RGB image
+def end2end_segment_based(img):  # RGB image
     from recognition.segment_based import segment_character, evaluate, model
     model1 = model.Segment_character(36).to(device)
     checkpoint_path = 'checkpoint/character_model.pt'
@@ -98,13 +95,11 @@ def end2end_segment_based(img): # RGB image
         x1, y1, x2, y2 = box_center2corner(boxes[i])
         x, y, w, h = int(x1), int(y1), int(w), int(h)
 
-
         font = cv2.FONT_HERSHEY_SIMPLEX
         fontScale = 1
         color = (255, 255, 255)
         thickness = 3
         cv2.rectangle(img, (int(x), int(y)), (int(x + w), int(y + h)), color, thickness)
-        cv2.putText(img, pred_str[0], (x, y+ h + 30), font, fontScale, color, thickness, cv2.LINE_AA)
-
+        cv2.putText(img, pred_str[0], (x, y + h + 30), font, fontScale, color, thickness, cv2.LINE_AA)
 
     plot_img(img)
