@@ -36,4 +36,4 @@ python recognition/segment_based/evaluate.py
 ```
 https://thanhlam104-lpr-streamlit-app-ot6pyc.streamlitapp.com/
 ```
-![image](https://user-images.githubusercontent.com/72648545/180603093-decddb3f-cbc5-4f2c-a870-b2f1f0030ab9.png)
+
